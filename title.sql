@@ -1,10 +1,6 @@
--- Delete the column rank to ensure we start all over again and have an empy rank column
-ALTER TABLE movies
-DROP COLUMN rank_t;
-
 -- Create empty column "rank" that stores the rank based on title
 ALTER TABLE movies
-ADD rank_t float4;
+ADD COLUMN IF NOT EXISTS rank_t float4;
 
 --calculate rank based on choosen movie 'MOVIE' is a placeholder that is replaced by the shell script
 UPDATE movies

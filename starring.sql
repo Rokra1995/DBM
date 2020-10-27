@@ -1,17 +1,13 @@
--- Delete the column rank to ensure we start all over again and have an empy rank column
-ALTER TABLE movies
-DROP COLUMN rank_s;
-
 --Here we add a new column to the movie database that stores the rank for starring
 ALTER TABLE movies
-ADD rank_s float4;
+ADD COLUMN IF NOT EXISTS rank_s float4;
 
 --Here we add the rank based on starring of our favourtie movie
 UPDATE movies
 SET rank_s = ts_rank(to_tsvector(Starring),plainto_tsquery((
 SELECT Summary FROM movies WHERE title='MOVIE')));
 
---To ensure not running into an error when we run the script twice the rec table will be dropped
+--To ensure not running into an error when we run the script twice the rec table will be dropped. Also to ensure the rec for the right movies are selected when we run the script several times.
 DROP TABLE recommendationsBasedOnStarringField;
 
 --Here we create the table again print it out and save it as a csv.I set rank to 0.05 to ensure there will be more then 2 movies.
