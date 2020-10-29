@@ -1,10 +1,10 @@
 import pandas as pd
 
 #load the data after preprocessing with sentiment_preprocess.py
-data = pd.read_csv("userReviewsWithSentiment.csv", sep=";")
+data = pd.read_csv("Input/userReviewsWithSentiment.csv", sep=";")
 
 #create subset of reviews on your favourite movie
-subset = data[data.movieName == 'beach-rats']
+subset = data[data.movieName == 'the-amazing-spider-man']
 
 #Create final dataframe for the recommendations that also includes the relative and absolute score
 recommendations = pd.DataFrame(columns=data.columns.tolist()+['rel_inc','abs_inc'])
@@ -26,17 +26,18 @@ for idx, Author in subset.iterrows():
 
     #filter possible recommendations and calculate sentiment scores
     possible_recommendations = data[filter1 & filter2 & filter3 & filter4]
-    possible_recommendations['rel_sent'] = possible_recommendations.sentiment_subjectivity/sent_subjectivity
-    possible_recommendations['abs_sent'] = possible_recommendations.sentiment_subjectivity - sent_subjectivity
+    possible_recommendations['rel_sent'] = possible_recommendations.sentiment_polarity/sent_polarity
+    possible_recommendations['abs_sent'] = possible_recommendations.sentiment_polarity - sent_polarity
     
     #append this to the recommendations df
     recommendations_sent = recommendations_sent.append(possible_recommendations)
 
 #sort the recommendations in a descending order first on the relative score then the absolute score
-recommendations_sent = recommendations_sent.sort_values(['rel_sent','abs_sent'], ascending=False)    
+recommendations_sent = recommendations_sent.sort_values(['abs_sent','rel_sent'], ascending=False)    
 #drop duplicates to decrease df size
 recommendations_sent = recommendations_sent.drop_duplicates(subset='movieName', keep="first")
 #write to csv and print first 25 recommendations
-recommendations_sent.to_csv("recommendationsBasedOnSentiments.csv", sep=";", index=False)
+recommendations_sent.head(50).to_csv("Output/recommendationsBasedOnSentiments.csv", sep=";", index=False)
 
-print(recommendations_sent.head(25))
+print(recommendations_sent.head(50))
+print(recommendations_sent.shape)

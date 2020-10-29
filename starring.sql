@@ -19,4 +19,4 @@ SELECT title, rank_s FROM movies WHERE rank_s > 0.05 ORDER BY rank_s DESC LIMIT 
 SELECT * FROM recommendationsBasedOnStarringField
 
 --Save the table as a csv
-\copy (SELECT * FROM recommendationsBasedOnStarringField) to '/home/pi/RSL/rec_starring.csv' WITH csv;
+\copy (SELECT * FROM recommendationsBasedOnStarringField) to '/home/pi/RSL/Output/recommendationBasedOnStarring.csv' WITH csv;

@@ -1,7 +1,7 @@
 import pandas as pd
 from pattern.en import sentiment
 
-data = pd.read_csv("userReviews.csv", sep=";")
+data = pd.read_csv("Input/userReviews.csv", sep=";")
 #Apply the sentiment function to each row of the summary column and store the resulting tuple in another column
 #Note: to compute this on a RPI it takes around 15 minutes
 data['sentiment_tuple'] = data['Summary'].apply(lambda x: sentiment(x))
@@ -11,4 +11,4 @@ data['sentiment_polarity'] = data['sentiment_tuple'].apply(lambda x: eval(x)[0])
 data['sentiment_subjectivity'] = data['sentiment_tuple'].apply(lambda x: eval(x)[1])
 
 #save analyzed data set again
-data.to_csv('userReviewsWithSentiment.csv', sep=";", index=False)
+data.to_csv('Input/userReviewsWithSentiment.csv', sep=";", index=False)

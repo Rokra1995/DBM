@@ -1,7 +1,7 @@
 import pandas as pd
 
 #load the data
-data = pd.read_csv("userReviews.csv", sep=";")
+data = pd.read_csv("Input/userReviews.csv", sep=";")
 
 #create empty dataframe with the same column names as data
 subset = pd.DataFrame(columns=data.columns.tolist())
@@ -14,7 +14,7 @@ for movie in range(len(data.movieName)):
         subset = subset.append(row)
 '''
 #create subset of reviews on your favourite movie
-subset = data[data.movieName == 'beach-rats']
+subset = data[data.movieName == 'the-amazing-spider-man']
 
 #Create final dataframe for the recommendations that also includes the relative and absolute score
 recommendations = pd.DataFrame(columns=data.columns.tolist()+['rel_inc','abs_inc'])
@@ -27,7 +27,12 @@ for idx, Author in subset.iterrows():
     #create a unique dataframe that contains all the movies that where ranked by the selected author 
     #with a higher ranking then the ranking on the movie we like
     #and calculate relative ranking increase and absolute ranking increase
-    possible_recommendations = data[(data.Author==author) & (data.Metascore_w>ranking)]
+    #filteroptions:
+    filter1 = (data.Author==author)
+    filter2 = (data.Metascore_w>ranking)
+
+    #extract possible recommandations and calculate relative and absolute score
+    possible_recommendations = data[filter1 & filter2]
     possible_recommendations.loc[:,'rel_inc'] = possible_recommendations.Metascore_w/ranking
     possible_recommendations.loc[:,'abs_inc'] = possible_recommendations.Metascore_w - ranking
     
@@ -39,5 +44,6 @@ recommendations = recommendations.sort_values(['rel_inc','abs_inc'], ascending=F
 #drop duplicates to decrease df size
 recommendations = recommendations.drop_duplicates(subset='movieName', keep="first")
 #write to csv and print first 25 recommendations
-recommendations.to_csv("recommendationsBasedOnMetscore.csv", sep=";", index=False)
-print(recommendations.head(25))
+recommendations.head(50).to_csv("Output/recommendationsBasedOnMetascore.csv", sep=";", index=False)
+print(recommendations.head(50))
+print(recommendations.shape)

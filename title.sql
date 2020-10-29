@@ -15,7 +15,7 @@ CREATE TABLE recommendationsBasedOnTitleField AS
 SELECT title, rank_t FROM movies WHERE rank_t > 0.05 ORDER BY rank_t DESC LIMIT 50;
 
 --save recommendations in csv file
-\copy (SELECT * FROM recommendationsBasedOnTitleField) to '/home/pi/RSL/rec_title.csv' WITH csv;
+\copy (SELECT * FROM recommendationsBasedOnTitleField) to '/home/pi/RSL/Output/recommendationBasedOnTitle.csv' WITH csv;
 
 --print the recommendations based on title to the shell
 SELECT * FROM recommendationsBasedOnTitleField;
