@@ -3,11 +3,14 @@ import pandas as pd
 #load the data
 data = pd.read_csv("Input/userReviews.csv", sep=";")
 
+#for speed and code optimization purpose the following comment was replaced with
+#aanother method to generate the subset, shown after the comment
+'''
 #create empty dataframe with the same column names as data
 subset = pd.DataFrame(columns=data.columns.tolist())
 
 #i replaced the slow loopig with the faster filter method
-'''
+
 for movie in range(len(data.movieName)):
     if data.movieName.iloc[movie] == 'beach-rats':
         row = data[movie:movie+1]

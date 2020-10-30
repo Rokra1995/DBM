@@ -23,3 +23,6 @@ NOTE:
 2. Inputs have to be stored in the Input Folder as: movies.csv and userReviews.csv
 
 The possible_movies.py contains a small script to identify movies that are in movies.csv AND userReviews.csv
+
+All code can be found on https://github.com/Rokra1995/DBM
+Copyright@Robin Kratschnayr

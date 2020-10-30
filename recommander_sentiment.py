@@ -5,10 +5,6 @@ data = pd.read_csv("Input/userReviewsWithSentiment.csv", sep=";")
 
 #create subset of reviews on your favourite movie
 subset = data[data.movieName == 'the-amazing-spider-man']
-
-#Create final dataframe for the recommendations that also includes the relative and absolute score
-recommendations = pd.DataFrame(columns=data.columns.tolist()+['rel_inc','abs_inc'])
-
 #Create final dataframe for the recommendations that also includes the relative and absolute score
 recommendations_sent = pd.DataFrame(columns=data.columns.tolist()+['rel_sent','abs_sent'])
 
