@@ -2,7 +2,7 @@
 ALTER TABLE movies
 ADD COLUMN IF NOT EXISTS rank_s float4;
 
---Here we add the rank based on starring of our favourtie movie
+--Here we add the rank based on starring of our favourtie movie. Note: 'MOVIE' is a placeholder that will be replaced by a shell script.
 UPDATE movies
 SET rank_s = ts_rank(to_tsvector(Starring),plainto_tsquery((
 SELECT Summary FROM movies WHERE title='MOVIE')));

@@ -3,7 +3,7 @@ This repository contains the code for a simply movie recommender system.
 How to use the SQL recommander System:
 
 1. Run "bash recommendations.sh" 
-2. Type in the favourite movie. In my case "Captain Phillipps". Spelling is important.
+2. Type in the favourite movie. In my case "The Amazing Spider-Man". Spelling is important.
 3. The recommendations based on summary will be displayed.
 4. Check the recommendations and press "q" to see the recommendations based on title
 5. Check the recommendations based on title and press q to see the recommendations based on starring
@@ -21,6 +21,7 @@ How to use the Python recommander System:
 NOTE:
 1. All Outputs are stored as csv files in the Output folder
 2. Inputs have to be stored in the Input Folder as: movies.csv and userReviews.csv
+3. This is just a super simple system. A lot of improvements can be made for example recommend based on the number of ratings etc.
 
 The possible_movies.py contains a small script to identify movies that are in movies.csv AND userReviews.csv
 
